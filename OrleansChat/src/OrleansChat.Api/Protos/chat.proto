@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "OrleansChat.Api.Grpc";
+
+package orleanschat;
+
+service ChatInternal {
+  rpc BroadcastSystemMessage (SystemMessageRequest) returns (SystemMessageResponse);
+  rpc GetRoomStats (RoomStatsRequest) returns (RoomStatsResponse);
+  rpc StreamPresenceUpdates (PresenceRequest) returns (stream PresenceUpdate);
+}
+
+message SystemMessageRequest {
+  string roomId = 1;
+  string text = 2;
+}
+
+message SystemMessageResponse {
+  bool ok = 1;
+}
+
+message RoomStatsRequest {
+  string roomId = 1;
+}
+
+message RoomStatsResponse {
+  string roomId = 1;
+  int32 memberCount = 2;
+}
+
+message PresenceRequest {
+  repeated string userIds = 1;
+}
+
+message PresenceUpdate {
+  string userId = 1;
+  string status = 2;
+  int64 atUnixMs = 3;
+}

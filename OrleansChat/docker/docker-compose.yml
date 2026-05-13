@@ -1,0 +1,67 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: orleanschat-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - orleanschat_mongo_data:/data/db
+
+  silo-1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.silo
+    container_name: orleanschat-silo1
+    environment:
+      ORLEANS_SILO_PORT: "11111"
+      ORLEANS_GATEWAY_PORT: "30000"
+      ORLEANS_DASHBOARD_PORT: "8080"
+      Mongo__ConnectionString: "mongodb://mongo:27017"
+      Mongo__DatabaseName: "orleans_chat_db"
+      Orleans__ClusterId: "orleans-chat-dev"
+      Orleans__ServiceId: "OrleansChat"
+    ports:
+      - "8082:8080"
+    depends_on:
+      - mongo
+
+  silo-2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.silo
+    container_name: orleanschat-silo2
+    environment:
+      ORLEANS_SILO_PORT: "11111"
+      ORLEANS_GATEWAY_PORT: "30000"
+      ORLEANS_DASHBOARD_PORT: "8080"
+      Mongo__ConnectionString: "mongodb://mongo:27017"
+      Mongo__DatabaseName: "orleans_chat_db"
+      Orleans__ClusterId: "orleans-chat-dev"
+      Orleans__ServiceId: "OrleansChat"
+    ports:
+      - "8083:8080"
+    depends_on:
+      - mongo
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    container_name: orleanschat-api
+    restart: on-failure
+    environment:
+      ASPNETCORE_URLS: "http://0.0.0.0:5000;http://0.0.0.0:5001"
+      Mongo__ConnectionString: "mongodb://mongo:27017"
+      Mongo__DatabaseName: "orleans_chat_db"
+      Orleans__ClusterId: "orleans-chat-dev"
+      Orleans__ServiceId: "OrleansChat"
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - silo-1
+      - silo-2
+
+volumes:
+  orleanschat_mongo_data:

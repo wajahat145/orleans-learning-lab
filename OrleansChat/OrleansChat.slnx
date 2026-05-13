@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OrleansChat.Abstractions/OrleansChat.Abstractions.csproj" />
+    <Project Path="src/OrleansChat.Api/OrleansChat.Api.csproj" />
+    <Project Path="src/OrleansChat.Grains/OrleansChat.Grains.csproj" />
+    <Project Path="src/OrleansChat.Infrastructure/OrleansChat.Infrastructure.csproj" />
+    <Project Path="src/OrleansChat.Silo/OrleansChat.Silo.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OrleansChat.Api.Tests/OrleansChat.Api.Tests.csproj" />
+    <Project Path="tests/OrleansChat.Grains.Tests/OrleansChat.Grains.Tests.csproj" />
+  </Folder>
+</Solution>
