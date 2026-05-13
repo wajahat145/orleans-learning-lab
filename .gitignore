@@ -1,0 +1,12 @@
+**/bin/
+**/obj/
+**/.vs/
+**/TestResults/
+
+OrleansChat/ui/**/node_modules/
+OrleansChat/ui/**/.next/
+OrleansChat/ui/**/out/
+OrleansChat/ui/**/dist/
+
+*.user
+*.suo
