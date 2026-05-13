@@ -1,4 +1,4 @@
-# Orleans Learning Lab — Chat
+# orleans-learning-lab
 
 This repository is a hands-on learning project for Microsoft Orleans.
 
@@ -12,12 +12,9 @@ It implements a simple distributed chat + notifications system to practice:
 - A small API gateway (REST + SSE, plus gRPC)
 - A minimal Next.js + Tailwind UI
 
-## Suggested repository names
+## Repository name
 
-If you want a clearer “learning repo” name:
-- `orleans-learning-lab`
-- `orleans-learning-chat`
-- `orleans-chat-lab`
+This repo is named `orleans-learning-lab`.
 
 ## What runs where
 
