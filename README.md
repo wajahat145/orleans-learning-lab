@@ -68,6 +68,4 @@ Open:
 
 - UI stuck on “Connecting…”:
   - Open `http://<your-ip>:3000/health` (should return `{"status":"ok"}`)
-  - If that works but messages don’t load, open DevTools → Console and share the error text
-- Can’t open from another device:
-  - Allow Windows Firewall inbound for ports `3000` (UI) and `5000` (API), or just use the UI proxy (`:3000`) only
+  - If that works but messages don’t load, open DevTools → Console and check the error text
