@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+      - name: Restore
+        run: dotnet restore OrleansChat/OrleansChat.slnx
+      - name: Build
+        run: dotnet build OrleansChat/OrleansChat.slnx -c Release --no-restore
+      - name: Test
+        run: dotnet test OrleansChat/OrleansChat.slnx -c Release --no-build
